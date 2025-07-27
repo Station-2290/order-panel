@@ -78,7 +78,7 @@ async function handleTokenRefresh(): Promise<boolean> {
 // Perform the actual token refresh
 async function performTokenRefresh(): Promise<boolean> {
   try {
-    console.debug('Attempting to refresh access token...')
+    console.debug('Attempting to refresh access token with refresh endpoint...')
     const response = await fetch(
       `${env.VITE_API_URL || 'http://localhost:3000'}/api/auth/refresh`,
       {
