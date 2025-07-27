@@ -1,23 +1,31 @@
-import { CheckCircle, Clock, Coffee, ShoppingBag, Timer, User, XCircle } from 'lucide-react';
-import type { Order } from '@/types/order';
+import {
+  CheckCircle,
+  Clock,
+  Coffee,
+  ShoppingBag,
+  Timer,
+  User,
+  XCircle,
+} from 'lucide-react'
+import type { Order } from '@/types/order'
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
-} from '@/components/ui/dialog';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Separator } from '@/components/ui/separator';
-import { ScrollArea } from '@/components/ui/scroll-area';
-import { OrderStatus } from '@/types/order';
-import { cn } from '@/lib/utils';
+} from '@/components/ui/dialog'
+import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
+import { Separator } from '@/components/ui/separator'
+import { ScrollArea } from '@/components/ui/scroll-area'
+import { OrderStatus } from '@/types/order'
+import { cn } from '@/lib/utils'
 
 interface OrderDetailsProps {
-  order: Order | null;
-  isOpen: boolean;
-  onClose: () => void;
-  onStatusUpdate: (orderId: number, status: OrderStatus) => void;
+  order: Order | null
+  isOpen: boolean
+  onClose: () => void
+  onStatusUpdate: (orderId: number, status: OrderStatus) => void
 }
 
 const statusConfig = {
@@ -57,7 +65,7 @@ const statusConfig = {
     label: 'Отменен',
     actions: [],
   },
-};
+}
 
 const actionLabels = {
   [OrderStatus.PENDING]: 'Принять заказ',
@@ -66,15 +74,20 @@ const actionLabels = {
   [OrderStatus.READY]: 'Заказ готов',
   [OrderStatus.COMPLETED]: 'Выдать заказ',
   [OrderStatus.CANCELLED]: 'Отменить заказ',
-};
+}
 
-export function OrderDetails({ order, isOpen, onClose, onStatusUpdate }: OrderDetailsProps) {
-  if (!order) return null;
+export function OrderDetails({
+  order,
+  isOpen,
+  onClose,
+  onStatusUpdate,
+}: OrderDetailsProps) {
+  if (!order) return null
 
-  const config = statusConfig[order.status];
-  const Icon = config.icon;
-  const createdAt = new Date(order.created_at);
-  const updatedAt = new Date(order.updated_at);
+  const config = statusConfig[order.status]
+  const Icon = config.icon
+  const createdAt = new Date(order.created_at)
+  const updatedAt = new Date(order.updated_at)
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
@@ -193,7 +206,9 @@ export function OrderDetails({ order, isOpen, onClose, onStatusUpdate }: OrderDe
             {/* Total */}
             <div className="flex items-center justify-between text-lg font-bold">
               <span>Итого:</span>
-              <span className="text-green-600">₽{order.total_amount.toFixed(2)}</span>
+              <span className="text-green-600">
+                ₽{order.total_amount.toFixed(2)}
+              </span>
             </div>
           </div>
         </ScrollArea>
@@ -205,16 +220,21 @@ export function OrderDetails({ order, isOpen, onClose, onStatusUpdate }: OrderDe
               <Button
                 key={status}
                 size="lg"
-                variant={status === OrderStatus.CANCELLED ? 'destructive' : 'default'}
+                variant={
+                  status === OrderStatus.CANCELLED ? 'destructive' : 'default'
+                }
                 onClick={() => {
-                  onStatusUpdate(order.id, status);
-                  onClose();
+                  onStatusUpdate(order.id, status)
+                  onClose()
                 }}
                 className={cn(
                   'flex-1',
-                  status === OrderStatus.READY && 'bg-green-600 hover:bg-green-700',
-                  status === OrderStatus.CONFIRMED && 'bg-blue-600 hover:bg-blue-700',
-                  status === OrderStatus.PREPARING && 'bg-orange-600 hover:bg-orange-700'
+                  status === OrderStatus.READY &&
+                    'bg-green-600 hover:bg-green-700',
+                  status === OrderStatus.CONFIRMED &&
+                    'bg-blue-600 hover:bg-blue-700',
+                  status === OrderStatus.PREPARING &&
+                    'bg-orange-600 hover:bg-orange-700',
                 )}
               >
                 {actionLabels[status]}
@@ -224,5 +244,5 @@ export function OrderDetails({ order, isOpen, onClose, onStatusUpdate }: OrderDe
         )}
       </DialogContent>
     </Dialog>
-  );
+  )
 }

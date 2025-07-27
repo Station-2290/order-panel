@@ -1,15 +1,18 @@
-import { LoginForm } from './LoginForm';
-import type {ReactNode} from 'react';
-import { useAuth } from '@/shared/auth';
-import { Skeleton } from '@/components/ui/skeleton';
+import { LoginForm } from './LoginForm'
+import type { ReactNode } from 'react'
+import { useAuth } from '@/shared/auth'
+import { Skeleton } from '@/components/ui/skeleton'
 
 interface ProtectedRouteProps {
-  children: ReactNode;
-  requiredRoles?: Array<string>;
+  children: ReactNode
+  requiredRoles?: Array<string>
 }
 
-export function ProtectedRoute({ children, requiredRoles }: ProtectedRouteProps) {
-  const { isAuthenticated, isLoading, user } = useAuth();
+export function ProtectedRoute({
+  children,
+  requiredRoles,
+}: ProtectedRouteProps) {
+  const { isAuthenticated, isLoading, user } = useAuth()
 
   if (isLoading) {
     return (
@@ -20,7 +23,7 @@ export function ProtectedRoute({ children, requiredRoles }: ProtectedRouteProps)
           <Skeleton className="h-12 w-full" />
         </div>
       </div>
-    );
+    )
   }
 
   if (!isAuthenticated) {
@@ -28,7 +31,7 @@ export function ProtectedRoute({ children, requiredRoles }: ProtectedRouteProps)
       <div className="h-screen flex items-center justify-center bg-muted/50">
         <LoginForm />
       </div>
-    );
+    )
   }
 
   if (requiredRoles && user && !requiredRoles.includes(user.role)) {
@@ -41,8 +44,8 @@ export function ProtectedRoute({ children, requiredRoles }: ProtectedRouteProps)
           </p>
         </div>
       </div>
-    );
+    )
   }
 
-  return <>{children}</>;
+  return <>{children}</>
 }

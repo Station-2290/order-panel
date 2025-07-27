@@ -1,13 +1,13 @@
-import { CheckCircle, Clock, Coffee, Timer, XCircle } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { OrderStatus } from '@/types/order';
-import { cn } from '@/lib/utils';
+import { CheckCircle, Clock, Coffee, Timer, XCircle } from 'lucide-react'
+import { Button } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
+import { OrderStatus } from '@/types/order'
+import { cn } from '@/lib/utils'
 
 interface OrderFiltersProps {
-  selectedStatus: OrderStatus | 'ALL';
-  onStatusChange: (status: OrderStatus | 'ALL') => void;
-  orderCounts: Record<OrderStatus | 'ALL', number>;
+  selectedStatus: OrderStatus | 'ALL'
+  onStatusChange: (status: OrderStatus | 'ALL') => void
+  orderCounts: Record<OrderStatus | 'ALL', number>
 }
 
 const filterConfig = {
@@ -46,16 +46,20 @@ const filterConfig = {
     icon: XCircle,
     color: 'bg-red-100 text-red-800',
   },
-};
+}
 
-export function OrderFilters({ selectedStatus, onStatusChange, orderCounts }: OrderFiltersProps) {
+export function OrderFilters({
+  selectedStatus,
+  onStatusChange,
+  orderCounts,
+}: OrderFiltersProps) {
   return (
     <div className="p-4 bg-background border-b">
       <div className="flex gap-2 overflow-x-auto pb-2 -mb-2 scrollbar-none">
         {Object.entries(filterConfig).map(([status, config]) => {
-          const isSelected = selectedStatus === status;
-          const count = orderCounts[status as OrderStatus | 'ALL'] || 0;
-          const Icon = config.icon;
+          const isSelected = selectedStatus === status
+          const count = orderCounts[status as OrderStatus | 'ALL'] || 0
+          const Icon = config.icon
 
           return (
             <Button
@@ -66,26 +70,26 @@ export function OrderFilters({ selectedStatus, onStatusChange, orderCounts }: Or
               className={cn(
                 'flex items-center gap-2 relative flex-shrink-0',
                 'mobile-filter-pill',
-                !isSelected && 'hover:bg-muted'
+                !isSelected && 'hover:bg-muted',
               )}
             >
               {Icon && <Icon className="w-4 h-4" />}
               <span className="whitespace-nowrap">{config.label}</span>
               {count > 0 && (
-                <Badge 
-                  variant="secondary" 
+                <Badge
+                  variant="secondary"
                   className={cn(
                     'ml-1 px-2 py-0 text-xs',
-                    isSelected ? 'bg-white/20 text-white' : config.color
+                    isSelected ? 'bg-white/20 text-white' : config.color,
                   )}
                 >
                   {count}
                 </Badge>
               )}
             </Button>
-          );
+          )
         })}
       </div>
     </div>
-  );
+  )
 }

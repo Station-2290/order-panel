@@ -1,1 +1,1 @@
-export { default as $api, fetchClient } from './client';
+export { default as $api, fetchClient } from './client'

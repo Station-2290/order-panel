@@ -157,17 +157,17 @@ jobs:
             export CONTAINER_NAME="coffee-shop-order-panel"
             export HOST_PORT="8081"
             export CONTAINER_PORT="80"
-            
+
             # Login to GitHub Container Registry
             echo "${{ secrets.GITHUB_TOKEN }}" | docker login ${{ env.REGISTRY }} -u ${{ github.actor }} --password-stdin
-            
+
             # Pull latest image
             docker pull $IMAGE_NAME
-            
+
             # Stop and remove existing container
             docker stop $CONTAINER_NAME || true
             docker rm $CONTAINER_NAME || true
-            
+
             # Run new container with health check
             docker run -d \
               --name $CONTAINER_NAME \
@@ -180,7 +180,7 @@ jobs:
               --health-timeout=10s \
               --health-retries=3 \
               $IMAGE_NAME
-            
+
             # Wait for health check
             echo "Waiting for service to be healthy..."
             timeout=60
@@ -193,13 +193,13 @@ jobs:
               sleep 5
               timeout=$((timeout - 5))
             done
-            
+
             if [ $timeout -le 0 ]; then
               echo "❌ Health check failed, rolling back..."
               docker logs $CONTAINER_NAME --tail 50
               exit 1
             fi
-            
+
             # Cleanup old images (keep last 3)
             docker images ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }} --format "table {{.Repository}}:{{.Tag}}\t{{.CreatedAt}}" | tail -n +2 | sort -k2 -r | tail -n +4 | awk '{print $1}' | xargs -r docker rmi || true
 

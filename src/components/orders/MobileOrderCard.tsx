@@ -1,15 +1,24 @@
-import { CheckCircle, ChevronRight, Clock, Coffee, ShoppingBag, Timer, User, XCircle } from 'lucide-react';
-import type {Order} from '@/types/order';
-import { Card, CardContent } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import {  OrderStatus } from '@/types/order';
-import { cn } from '@/lib/utils';
+import {
+  CheckCircle,
+  ChevronRight,
+  Clock,
+  Coffee,
+  ShoppingBag,
+  Timer,
+  User,
+  XCircle,
+} from 'lucide-react'
+import type { Order } from '@/types/order'
+import { Card, CardContent } from '@/components/ui/card'
+import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
+import { OrderStatus } from '@/types/order'
+import { cn } from '@/lib/utils'
 
 interface MobileOrderCardProps {
-  order: Order;
-  onStatusUpdate: (orderId: number, status: OrderStatus) => void;
-  onViewDetails: (order: Order) => void;
+  order: Order
+  onStatusUpdate: (orderId: number, status: OrderStatus) => void
+  onViewDetails: (order: Order) => void
 }
 
 const statusConfig = {
@@ -61,7 +70,7 @@ const statusConfig = {
     bgColor: 'bg-red-50',
     borderColor: 'border-l-red-500',
   },
-};
+}
 
 const actionLabels = {
   [OrderStatus.PENDING]: 'Ожидает',
@@ -70,39 +79,45 @@ const actionLabels = {
   [OrderStatus.READY]: 'Готов',
   [OrderStatus.COMPLETED]: 'Выдан',
   [OrderStatus.CANCELLED]: 'Отменить',
-};
+}
 
-export function MobileOrderCard({ order, onStatusUpdate, onViewDetails }: MobileOrderCardProps) {
-  const config = statusConfig[order.status];
-  const Icon = config.icon;
-  const createdAt = new Date(order.created_at);
-  const timeAgo = Math.floor((Date.now() - createdAt.getTime()) / (1000 * 60));
+export function MobileOrderCard({
+  order,
+  onStatusUpdate,
+  onViewDetails,
+}: MobileOrderCardProps) {
+  const config = statusConfig[order.status]
+  const Icon = config.icon
+  const createdAt = new Date(order.created_at)
+  const timeAgo = Math.floor((Date.now() - createdAt.getTime()) / (1000 * 60))
 
   const getTimeColor = (minutes: number) => {
-    if (minutes < 5) return 'text-green-600';
-    if (minutes < 15) return 'text-yellow-600';
-    return 'text-red-600';
-  };
+    if (minutes < 5) return 'text-green-600'
+    if (minutes < 15) return 'text-yellow-600'
+    return 'text-red-600'
+  }
 
   const getQuickAction = () => {
-    if (config.actions.length === 0) return null;
-    
-    // Get the primary action (non-cancel)
-    const primaryAction = config.actions.find(action => action !== OrderStatus.CANCELLED);
-    if (!primaryAction) return config.actions[0];
-    
-    return primaryAction;
-  };
+    if (config.actions.length === 0) return null
 
-  const quickAction = getQuickAction();
+    // Get the primary action (non-cancel)
+    const primaryAction = config.actions.find(
+      (action) => action !== OrderStatus.CANCELLED,
+    )
+    if (!primaryAction) return config.actions[0]
+
+    return primaryAction
+  }
+
+  const quickAction = getQuickAction()
 
   return (
-    <Card 
+    <Card
       className={cn(
         'transition-all duration-200 border-l-4 active:scale-95 touch-manipulation',
         'mobile-card',
         config.borderColor,
-        config.bgColor
+        config.bgColor,
       )}
       onClick={() => onViewDetails(order)}
     >
@@ -158,16 +173,23 @@ export function MobileOrderCard({ order, onStatusUpdate, onViewDetails }: Mobile
           <div className="pt-2 border-t">
             <Button
               size="sm"
-              variant={quickAction === OrderStatus.CANCELLED ? 'destructive' : 'default'}
+              variant={
+                quickAction === OrderStatus.CANCELLED
+                  ? 'destructive'
+                  : 'default'
+              }
               onClick={(e) => {
-                e.stopPropagation();
-                onStatusUpdate(order.id, quickAction);
+                e.stopPropagation()
+                onStatusUpdate(order.id, quickAction)
               }}
               className={cn(
                 'w-full',
-                quickAction === OrderStatus.READY && 'bg-green-600 hover:bg-green-700',
-                quickAction === OrderStatus.CONFIRMED && 'bg-blue-600 hover:bg-blue-700',
-                quickAction === OrderStatus.PREPARING && 'bg-orange-600 hover:bg-orange-700'
+                quickAction === OrderStatus.READY &&
+                  'bg-green-600 hover:bg-green-700',
+                quickAction === OrderStatus.CONFIRMED &&
+                  'bg-blue-600 hover:bg-blue-700',
+                quickAction === OrderStatus.PREPARING &&
+                  'bg-orange-600 hover:bg-orange-700',
               )}
             >
               {actionLabels[quickAction]}
@@ -176,5 +198,5 @@ export function MobileOrderCard({ order, onStatusUpdate, onViewDetails }: Mobile
         )}
       </CardContent>
     </Card>
-  );
+  )
 }

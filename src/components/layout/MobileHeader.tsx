@@ -1,25 +1,30 @@
-import { LogOut, RefreshCw, User } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { useAuth } from '@/shared/auth';
-import { cn } from '@/lib/utils';
+import { LogOut, RefreshCw, User } from 'lucide-react'
+import { Button } from '@/components/ui/button'
+import { useAuth } from '@/shared/auth'
+import { cn } from '@/lib/utils'
 
 interface MobileHeaderProps {
-  title: string;
-  subtitle?: string;
-  onRefresh?: () => void;
-  isRefreshing?: boolean;
+  title: string
+  subtitle?: string
+  onRefresh?: () => void
+  isRefreshing?: boolean
 }
 
-export function MobileHeader({ title, subtitle, onRefresh, isRefreshing }: MobileHeaderProps) {
-  const { user, logout } = useAuth();
+export function MobileHeader({
+  title,
+  subtitle,
+  onRefresh,
+  isRefreshing,
+}: MobileHeaderProps) {
+  const { user, logout } = useAuth()
 
   const handleLogout = async () => {
     try {
-      await logout();
+      await logout()
     } catch (error) {
-      console.error('Logout failed:', error);
+      console.error('Logout failed:', error)
     }
-  };
+  }
 
   return (
     <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-200 shadow-sm">
@@ -30,9 +35,7 @@ export function MobileHeader({ title, subtitle, onRefresh, isRefreshing }: Mobil
             {title}
           </h1>
           {subtitle && (
-            <p className="text-sm text-gray-500 truncate">
-              {subtitle}
-            </p>
+            <p className="text-sm text-gray-500 truncate">{subtitle}</p>
           )}
         </div>
 
@@ -46,10 +49,12 @@ export function MobileHeader({ title, subtitle, onRefresh, isRefreshing }: Mobil
               disabled={isRefreshing}
               className="h-8 w-8 p-0"
             >
-              <RefreshCw className={cn('h-4 w-4', isRefreshing && 'animate-spin')} />
+              <RefreshCw
+                className={cn('h-4 w-4', isRefreshing && 'animate-spin')}
+              />
             </Button>
           )}
-          
+
           {/* User menu */}
           <div className="flex items-center gap-2">
             {user && (
@@ -60,7 +65,7 @@ export function MobileHeader({ title, subtitle, onRefresh, isRefreshing }: Mobil
                 </span>
               </div>
             )}
-            
+
             <Button
               variant="ghost"
               size="sm"
@@ -73,5 +78,5 @@ export function MobileHeader({ title, subtitle, onRefresh, isRefreshing }: Mobil
         </div>
       </div>
     </header>
-  );
+  )
 }

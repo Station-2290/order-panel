@@ -1,33 +1,40 @@
-import { createFileRoute } from '@tanstack/react-router';
-import { Bell, LogOut, Shield, User } from 'lucide-react';
-import { ResponsiveLayout } from '@/components/layout/ResponsiveLayout';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Switch } from '@/components/ui/switch';
-import { Label } from '@/components/ui/label';
-import { useAuth } from '@/shared/auth';
-import { useDocumentTitle } from '@/hooks/useDocumentTitle';
+import { createFileRoute } from '@tanstack/react-router'
+import { Bell, LogOut, Shield, User } from 'lucide-react'
+import { ResponsiveLayout } from '@/components/layout/ResponsiveLayout'
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { Switch } from '@/components/ui/switch'
+import { Label } from '@/components/ui/label'
+import { useAuth } from '@/shared/auth'
+import { useDocumentTitle } from '@/hooks/useDocumentTitle'
 
 export const Route = createFileRoute('/settings')({
   component: SettingsComponent,
-});
+})
 
 function SettingsComponent() {
-  const { user, logout } = useAuth();
-  
+  const { user, logout } = useAuth()
+
   useDocumentTitle({
     title: 'Настройки',
-    description: 'Настройки панели заказов - управление профилем, уведомлениями и безопасностью',
-    keywords: 'настройки, профиль, уведомления, безопасность, панель заказов'
-  });
+    description:
+      'Настройки панели заказов - управление профилем, уведомлениями и безопасностью',
+    keywords: 'настройки, профиль, уведомления, безопасность, панель заказов',
+  })
 
   const handleLogout = async () => {
     try {
-      await logout();
+      await logout()
     } catch (error) {
-      console.error('Logout failed:', error);
+      console.error('Logout failed:', error)
     }
-  };
+  }
 
   return (
     <ResponsiveLayout mobileTitle="Настройки">
@@ -51,8 +58,12 @@ function SettingsComponent() {
             {user && (
               <div className="space-y-2">
                 <div>
-                  <Label className="text-sm font-medium">Имя пользователя</Label>
-                  <p className="text-sm text-muted-foreground">{user.username}</p>
+                  <Label className="text-sm font-medium">
+                    Имя пользователя
+                  </Label>
+                  <p className="text-sm text-muted-foreground">
+                    {user.username}
+                  </p>
                 </div>
                 <div>
                   <Label className="text-sm font-medium">Email</Label>
@@ -106,8 +117,8 @@ function SettingsComponent() {
             <Button variant="outline" className="w-full justify-start">
               Изменить пароль
             </Button>
-            <Button 
-              variant="destructive" 
+            <Button
+              variant="destructive"
               className="w-full justify-start"
               onClick={handleLogout}
             >
@@ -118,5 +129,5 @@ function SettingsComponent() {
         </Card>
       </div>
     </ResponsiveLayout>
-  );
+  )
 }

@@ -1,24 +1,30 @@
-import { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
-import { Loader2 } from 'lucide-react';
-import type { LoginCredentials } from '@/shared/auth/types';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Alert, AlertDescription } from '@/components/ui/alert';
-import { useAuth } from '@/shared/auth';
+import { useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { z } from 'zod'
+import { Loader2 } from 'lucide-react'
+import type { LoginCredentials } from '@/shared/auth/types'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card'
+import { Alert, AlertDescription } from '@/components/ui/alert'
+import { useAuth } from '@/shared/auth'
 
 const loginSchema = z.object({
   login: z.string().min(1, 'Введите логин или email'),
   password: z.string().min(1, 'Введите пароль'),
-});
+})
 
 export function LoginForm() {
-  const { login, isLoading } = useAuth();
-  const [error, setError] = useState<string | null>(null);
+  const { login, isLoading } = useAuth()
+  const [error, setError] = useState<string | null>(null)
 
   const {
     register,
@@ -26,16 +32,18 @@ export function LoginForm() {
     formState: { errors },
   } = useForm<LoginCredentials>({
     resolver: zodResolver(loginSchema),
-  });
+  })
 
   const onSubmit = async (data: LoginCredentials) => {
     try {
-      setError(null);
-      await login(data);
+      setError(null)
+      await login(data)
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Произошла ошибка при входе');
+      setError(
+        err instanceof Error ? err.message : 'Произошла ошибка при входе',
+      )
     }
-  };
+  }
 
   return (
     <Card className="w-full max-w-md mx-auto">
@@ -79,7 +87,9 @@ export function LoginForm() {
               disabled={isLoading}
             />
             {errors.password && (
-              <p className="text-sm text-destructive">{errors.password.message}</p>
+              <p className="text-sm text-destructive">
+                {errors.password.message}
+              </p>
             )}
           </div>
 
@@ -90,5 +100,5 @@ export function LoginForm() {
         </form>
       </CardContent>
     </Card>
-  );
+  )
 }

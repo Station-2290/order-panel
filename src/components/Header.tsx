@@ -25,7 +25,7 @@ export default function Header() {
           <Link to="/orders">Заказы</Link>
         </div>
       </nav>
-      
+
       <div className="flex items-center gap-2">
         {user && (
           <div className="flex items-center gap-2 text-sm">
@@ -34,9 +34,9 @@ export default function Header() {
             <span className="text-muted-foreground">({user.role})</span>
           </div>
         )}
-        <Button 
-          variant="outline" 
-          size="sm" 
+        <Button
+          variant="outline"
+          size="sm"
           onClick={handleLogout}
           className="flex items-center gap-1"
         >

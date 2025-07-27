@@ -142,13 +142,14 @@ code {
   .touch-manipulation {
     touch-action: manipulation;
   }
-  
+
   /* Increase tap targets for better accessibility */
-  button, [role="button"] {
+  button,
+  [role='button'] {
     min-height: 44px;
     min-width: 44px;
   }
-  
+
   /* Better tap feedback */
   .active\:scale-95:active {
     transform: scale(0.95);
@@ -158,7 +159,9 @@ code {
 
 /* Prevent zoom on input focus for iOS */
 @media screen and (max-device-width: 768px) {
-  input, textarea, select {
+  input,
+  textarea,
+  select {
     font-size: 16px !important;
   }
 }
@@ -184,13 +187,23 @@ code {
 
 /* Order status animations */
 @keyframes pulse-yellow {
-  0%, 100% { background-color: rgb(254 249 195); }
-  50% { background-color: rgb(253 224 71); }
+  0%,
+  100% {
+    background-color: rgb(254 249 195);
+  }
+  50% {
+    background-color: rgb(253 224 71);
+  }
 }
 
 @keyframes pulse-green {
-  0%, 100% { background-color: rgb(220 252 231); }
-  50% { background-color: rgb(34 197 94); }
+  0%,
+  100% {
+    background-color: rgb(220 252 231);
+  }
+  50% {
+    background-color: rgb(34 197 94);
+  }
 }
 
 .animate-pulse-yellow {
@@ -220,15 +233,15 @@ code {
   .safe-area-pt {
     padding-top: max(env(safe-area-inset-top), 1rem);
   }
-  
+
   .safe-area-pb {
     padding-bottom: max(env(safe-area-inset-bottom), 1rem);
   }
-  
+
   .safe-area-pl {
     padding-left: max(env(safe-area-inset-left), 1rem);
   }
-  
+
   .safe-area-pr {
     padding-right: max(env(safe-area-inset-right), 1rem);
   }
@@ -241,7 +254,7 @@ code {
     overflow-x: hidden;
     -webkit-overflow-scrolling: touch;
   }
-  
+
   /* Better mobile header */
   .mobile-header {
     position: sticky;
@@ -251,27 +264,27 @@ code {
     background-color: rgba(255, 255, 255, 0.95);
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   }
-  
+
   /* Mobile bottom navigation improvements */
   .mobile-bottom-nav {
     backdrop-filter: blur(10px);
     background-color: rgba(255, 255, 255, 0.95);
     border-top: 1px solid rgba(0, 0, 0, 0.1);
   }
-  
+
   /* Improve scroll performance on mobile */
   .mobile-scroll-container {
     -webkit-overflow-scrolling: touch;
     overflow-scrolling: touch;
   }
-  
+
   /* Mobile card improvements */
   .mobile-card {
     border-radius: 12px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     margin-bottom: 12px;
   }
-  
+
   /* Better mobile filter pills */
   .mobile-filter-pill {
     border-radius: 20px;
@@ -287,11 +300,11 @@ code {
   .mobile-header {
     padding: 0.5rem 1rem;
   }
-  
+
   .mobile-header h1 {
     font-size: 1rem !important;
   }
-  
+
   .mobile-header p {
     font-size: 0.75rem !important;
   }

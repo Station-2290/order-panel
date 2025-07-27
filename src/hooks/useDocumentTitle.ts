@@ -1,83 +1,93 @@
-import { useEffect } from 'react';
+import { useEffect } from 'react'
 
 interface UseDocumentTitleProps {
-  title: string;
-  description?: string;
-  keywords?: string;
+  title: string
+  description?: string
+  keywords?: string
 }
 
-export function useDocumentTitle({ title, description, keywords }: UseDocumentTitleProps) {
+export function useDocumentTitle({
+  title,
+  description,
+  keywords,
+}: UseDocumentTitleProps) {
   useEffect(() => {
-    const previousTitle = document.title;
-    const fullTitle = `${title} | Панель заказов кофейни`;
-    
+    const previousTitle = document.title
+    const fullTitle = `${title} | Панель заказов кофейни`
+
     // Store previous meta values for cleanup
-    const previousMeta = new Map<string, string>();
-    
+    const previousMeta = new Map<string, string>()
+
     // Helper function to update meta tag
-    const updateMetaTag = (name: string, content: string, property?: boolean) => {
-      const selector = property ? `meta[property="${name}"]` : `meta[name="${name}"]`;
-      let metaTag = document.querySelector(selector) as HTMLMetaElement;
-      
-      previousMeta.set(name, metaTag.getAttribute('content') || '');
-        metaTag = document.createElement('meta');
-        if (property) {
-          metaTag.setAttribute('property', name);
-        } else {
-          metaTag.setAttribute('name', name);
-        }
-        document.head.appendChild(metaTag);
-      previousMeta.set(name, '');
-      
-      metaTag.setAttribute('content', content);
-    };
-    
+    const updateMetaTag = (
+      name: string,
+      content: string,
+      property?: boolean,
+    ) => {
+      const selector = property
+        ? `meta[property="${name}"]`
+        : `meta[name="${name}"]`
+      let metaTag = document.querySelector(selector) as HTMLMetaElement
+
+      previousMeta.set(name, metaTag.getAttribute('content') || '')
+      metaTag = document.createElement('meta')
+      if (property) {
+        metaTag.setAttribute('property', name)
+      } else {
+        metaTag.setAttribute('name', name)
+      }
+      document.head.appendChild(metaTag)
+      previousMeta.set(name, '')
+
+      metaTag.setAttribute('content', content)
+    }
+
     // Update title
-    document.title = fullTitle;
-    
+    document.title = fullTitle
+
     // Update basic meta tags
     if (description) {
-      updateMetaTag('description', description);
-      
+      updateMetaTag('description', description)
+
       // Open Graph meta tags
-      updateMetaTag('og:title', fullTitle, true);
-      updateMetaTag('og:description', description, true);
-      updateMetaTag('og:type', 'website', true);
-      updateMetaTag('og:site_name', 'Панель заказов кофейни', true);
-      
+      updateMetaTag('og:title', fullTitle, true)
+      updateMetaTag('og:description', description, true)
+      updateMetaTag('og:type', 'website', true)
+      updateMetaTag('og:site_name', 'Панель заказов кофейни', true)
+
       // Twitter Card meta tags
-      updateMetaTag('twitter:card', 'summary');
-      updateMetaTag('twitter:title', fullTitle);
-      updateMetaTag('twitter:description', description);
+      updateMetaTag('twitter:card', 'summary')
+      updateMetaTag('twitter:title', fullTitle)
+      updateMetaTag('twitter:description', description)
     }
-    
+
     if (keywords) {
-      updateMetaTag('keywords', keywords);
+      updateMetaTag('keywords', keywords)
     }
-    
+
     // Cleanup function to restore previous values
     return () => {
-      document.title = previousTitle;
-      
+      document.title = previousTitle
+
       // Restore previous meta values
       previousMeta.forEach((prevContent, metaName) => {
         const selectors = [
           `meta[name="${metaName}"]`,
-          `meta[property="${metaName}"]`
-        ];
-        
+          `meta[property="${metaName}"]`,
+        ]
+
         for (const selector of selectors) {
-          const metaTag = document.querySelector(selector);
+          const metaTag = document.querySelector(selector)
           if (metaTag) {
             if (prevContent) {
-              metaTag.setAttribute('content', prevContent);
+              metaTag.setAttribute('content', prevContent)
             } else {
-              metaTag.remove();
+              metaTag.remove()
             }
-            break;
+            break
           }
         }
-      });
-    };
-  }, [title, description, keywords]);
+      })
+    }
+  }, [title, description, keywords])
 }

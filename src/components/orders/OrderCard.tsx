@@ -1,15 +1,23 @@
-import { CheckCircle, Clock, Coffee, ShoppingBag, Timer, User, XCircle } from 'lucide-react';
-import type { Order } from '@/types/order';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { OrderStatus } from '@/types/order';
-import { cn } from '@/lib/utils';
+import {
+  CheckCircle,
+  Clock,
+  Coffee,
+  ShoppingBag,
+  Timer,
+  User,
+  XCircle,
+} from 'lucide-react'
+import type { Order } from '@/types/order'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
+import { OrderStatus } from '@/types/order'
+import { cn } from '@/lib/utils'
 
 interface OrderCardProps {
-  order: Order;
-  onStatusUpdate: (orderId: number, status: OrderStatus) => void;
-  onViewDetails: (order: Order) => void;
+  order: Order
+  onStatusUpdate: (orderId: number, status: OrderStatus) => void
+  onViewDetails: (order: Order) => void
 }
 
 const statusConfig = {
@@ -49,7 +57,7 @@ const statusConfig = {
     label: 'Отменен',
     actions: [],
   },
-};
+}
 
 const actionLabels = {
   [OrderStatus.PENDING]: 'Ожидает',
@@ -58,30 +66,36 @@ const actionLabels = {
   [OrderStatus.READY]: 'Готов',
   [OrderStatus.COMPLETED]: 'Выдан',
   [OrderStatus.CANCELLED]: 'Отменить',
-};
+}
 
-export function OrderCard({ order, onStatusUpdate, onViewDetails }: OrderCardProps) {
-  const config = statusConfig[order.status];
-  const Icon = config.icon;
-  const createdAt = new Date(order.created_at);
-  const timeAgo = Math.floor((Date.now() - createdAt.getTime()) / (1000 * 60));
+export function OrderCard({
+  order,
+  onStatusUpdate,
+  onViewDetails,
+}: OrderCardProps) {
+  const config = statusConfig[order.status]
+  const Icon = config.icon
+  const createdAt = new Date(order.created_at)
+  const timeAgo = Math.floor((Date.now() - createdAt.getTime()) / (1000 * 60))
 
   const getTimeColor = (minutes: number) => {
-    if (minutes < 5) return 'text-green-600';
-    if (minutes < 15) return 'text-yellow-600';
-    return 'text-red-600';
-  };
+    if (minutes < 5) return 'text-green-600'
+    if (minutes < 15) return 'text-yellow-600'
+    return 'text-red-600'
+  }
 
   return (
-    <Card className={cn(
-      'transition-all duration-200 hover:shadow-lg border-l-4',
-      order.status === OrderStatus.PENDING && 'border-l-yellow-500',
-      order.status === OrderStatus.CONFIRMED && 'border-l-blue-500',
-      order.status === OrderStatus.PREPARING && 'border-l-orange-500',
-      order.status === OrderStatus.READY && 'border-l-green-500',
-      order.status === OrderStatus.COMPLETED && 'border-l-gray-400',
-      order.status === OrderStatus.CANCELLED && 'border-l-red-500'
-    )}>
+    <Card
+      className={cn(
+        'transition-all duration-200 hover:shadow-lg border-l-4',
+        order.status === OrderStatus.PENDING && 'border-l-yellow-500',
+        order.status === OrderStatus.CONFIRMED && 'border-l-blue-500',
+        order.status === OrderStatus.PREPARING && 'border-l-orange-500',
+        order.status === OrderStatus.READY && 'border-l-green-500',
+        order.status === OrderStatus.COMPLETED && 'border-l-gray-400',
+        order.status === OrderStatus.CANCELLED && 'border-l-red-500',
+      )}
+    >
       <CardHeader className="pb-3">
         <div className="flex items-center justify-between">
           <CardTitle className="text-lg font-bold">
@@ -102,12 +116,14 @@ export function OrderCard({ order, onStatusUpdate, onViewDetails }: OrderCardPro
           {order.customer && (
             <div className="flex items-center gap-1">
               <User className="w-4 h-4" />
-              <span>{order.customer.first_name} {order.customer.last_name}</span>
+              <span>
+                {order.customer.first_name} {order.customer.last_name}
+              </span>
             </div>
           )}
         </div>
       </CardHeader>
-      
+
       <CardContent className="space-y-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
@@ -138,18 +154,23 @@ export function OrderCard({ order, onStatusUpdate, onViewDetails }: OrderCardPro
           >
             Детали
           </Button>
-          
+
           {config.actions.map((status) => (
             <Button
               key={status}
               size="sm"
-              variant={status === OrderStatus.CANCELLED ? 'destructive' : 'default'}
+              variant={
+                status === OrderStatus.CANCELLED ? 'destructive' : 'default'
+              }
               onClick={() => onStatusUpdate(order.id, status)}
               className={cn(
                 'flex-1',
-                status === OrderStatus.READY && 'bg-green-600 hover:bg-green-700',
-                status === OrderStatus.CONFIRMED && 'bg-blue-600 hover:bg-blue-700',
-                status === OrderStatus.PREPARING && 'bg-orange-600 hover:bg-orange-700'
+                status === OrderStatus.READY &&
+                  'bg-green-600 hover:bg-green-700',
+                status === OrderStatus.CONFIRMED &&
+                  'bg-blue-600 hover:bg-blue-700',
+                status === OrderStatus.PREPARING &&
+                  'bg-orange-600 hover:bg-orange-700',
               )}
             >
               {actionLabels[status]}
@@ -158,5 +179,5 @@ export function OrderCard({ order, onStatusUpdate, onViewDetails }: OrderCardPro
         </div>
       </CardContent>
     </Card>
-  );
+  )
 }

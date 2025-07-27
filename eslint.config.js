@@ -1,29 +1,28 @@
 //  @ts-check
 
-import { tanstackConfig } from "@tanstack/eslint-config";
+import { tanstackConfig } from '@tanstack/eslint-config'
 
 export default [
   ...tanstackConfig,
   {
     ignores: [
-      "**/__generated__/**/*",
-      "**/__schemas__/**/*",
-      "**/src/types/**/*",
-      "eslint.config.js",
-      "prettier.config.js",
-      "vite.config.ts",
-      "vitest.config.ts",
-      "**/__generated__/**/*",
-      "**/components/ui/**/*",
+      '**/__generated__/**/*',
+      '**/components/ui/**/*',
+      '**/__schemas__/**/*',
+      '**/src/types/**/*',
+      'eslint.config.js',
+      'prettier.config.js',
+      'vite.config.ts',
+      'vitest.config.ts',
     ],
     rules: {
-      "@typescript-eslint/no-unused-vars": [
-        "error",
+      '@typescript-eslint/no-unused-vars': [
+        'error',
         {
-          argsIgnorePattern: "^_",
-          varsIgnorePattern: "^_",
+          argsIgnorePattern: '^_',
+          varsIgnorePattern: '^_',
         },
       ],
     },
   },
-];
+]
