@@ -1,6 +1,6 @@
+import { URL, fileURLToPath } from 'node:url'
 import { defineConfig } from 'vitest/config'
 import viteReact from '@vitejs/plugin-react'
-import { fileURLToPath, URL } from 'node:url'
 
 export default defineConfig({
   plugins: [viteReact()],

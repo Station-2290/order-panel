@@ -1,7 +1,6 @@
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import type { Order, OrderStatus  } from '@/types/order';
 import { fetchClient } from '@/shared/api';
-import type { Order } from '@/types/order';
-import { OrderStatus } from '@/types/order';
 
 interface OrdersQueryParams {
   page?: number;
@@ -10,7 +9,7 @@ interface OrdersQueryParams {
 }
 
 interface OrdersResponse {
-  data: Order[];
+  data: Array<Order>;
   meta: {
     page: number;
     limit: number;
@@ -20,7 +19,7 @@ interface OrdersResponse {
 }
 
 interface ApiOrdersResponse {
-  data: Order[];
+  data: Array<Order>;
   meta: {
     page: number;
     limit: number;

@@ -1,8 +1,8 @@
-import { OrderManagement } from './OrderManagement';
-import { ResponsiveLayout } from '../layout/ResponsiveLayout';
-import { useOrders } from '@/hooks/useOrders';
 import { useState } from 'react';
-import { OrderStatus } from '@/types/order';
+import { ResponsiveLayout } from '../layout/ResponsiveLayout';
+import { OrderManagement } from './OrderManagement';
+import type { OrderStatus } from '@/types/order';
+import { useOrders } from '@/hooks/useOrders';
 import { useDocumentTitle } from '@/hooks/useDocumentTitle';
 
 export function OrderManagementPage() {

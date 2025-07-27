@@ -35,7 +35,7 @@ export interface Order {
   customer_id?: number | null;
   created_at: string;
   updated_at: string;
-  items?: OrderItem[];
+  items?: Array<OrderItem>;
   customer?: {
     id: number;
     first_name: string;

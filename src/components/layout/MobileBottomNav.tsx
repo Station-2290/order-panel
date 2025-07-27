@@ -1,5 +1,5 @@
 import { Link, useLocation } from '@tanstack/react-router';
-import { Home, ShoppingBag, Settings, BarChart3 } from 'lucide-react';
+import { BarChart3, Home, Settings, ShoppingBag } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 interface NavItem {
@@ -16,7 +16,7 @@ interface MobileBottomNavProps {
 export function MobileBottomNav({ className }: MobileBottomNavProps) {
   const location = useLocation();
   
-  const navItems: NavItem[] = [
+  const navItems: Array<NavItem> = [
     {
       icon: Home,
       label: 'Главная',

@@ -8,8 +8,8 @@
     "build": "vite build",
     "serve": "vite preview",
     "test": "vitest run --passWithNoTests --config vitest.config.ts",
-    "lint": "eslint",
-    "format": "prettier",
+    "lint": "eslint .",
+    "format": "prettier .",
     "check": "prettier --write . && eslint --fix",
     "postinstall": "pnpm gen:api",
     "gen:api": "openapi-typescript ./__schemas__/openapi.json -o ./src/__generated__/api/index.ts"
@@ -80,6 +80,7 @@
     "@types/react": "^19.0.8",
     "@types/react-dom": "^19.0.3",
     "@vitejs/plugin-react": "^4.3.4",
+    "eslint": "^9.32.0",
     "jsdom": "^26.0.0",
     "openapi-typescript": "^7.8.0",
     "prettier": "^3.5.3",

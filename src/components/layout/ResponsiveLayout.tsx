@@ -1,7 +1,7 @@
-import type { ReactNode } from 'react';
+import Header from '../Header';
 import { MobileHeader } from './MobileHeader';
 import { MobileBottomNav } from './MobileBottomNav';
-import Header from '../Header';
+import type { ReactNode } from 'react';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { cn } from '@/lib/utils';
 

@@ -1,16 +1,16 @@
-import { useState, useMemo } from 'react';
+import { useMemo, useState } from 'react';
+import { Loader2, RefreshCw, Wifi, WifiOff } from 'lucide-react';
+import { toast } from 'sonner';
 import { OrderCard } from './OrderCard';
 import { MobileOrderCard } from './MobileOrderCard';
 import { OrderFilters } from './OrderFilters';
 import { OrderDetails } from './OrderDetails';
 import type { Order } from '@/types/order';
 import { OrderStatus } from '@/types/order';
-import { useOrders, useUpdateOrder, useCancelOrder } from '@/hooks/useOrders';
+import { useCancelOrder, useOrders, useUpdateOrder } from '@/hooks/useOrders';
 import { useOrderEvents } from '@/hooks/useOrderEvents';
-import { Loader2, RefreshCw, Wifi, WifiOff } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useIsMobile } from '@/hooks/use-mobile';
-import { toast } from 'sonner';
 import { cn } from '@/lib/utils';
 
 export function OrderManagement() {
@@ -130,6 +130,7 @@ export function OrderManagement() {
                 onClick={handleRefresh}
                 disabled={isLoading}
               >
+                {/* eslint-disable-next-line @typescript-eslint/no-unnecessary-condition */}
                 <RefreshCw className={cn('h-4 w-4', isLoading && 'animate-spin')} />
                 <span className="ml-1">Обновить</span>
               </Button>

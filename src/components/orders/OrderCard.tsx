@@ -1,8 +1,8 @@
+import { CheckCircle, Clock, Coffee, ShoppingBag, Timer, User, XCircle } from 'lucide-react';
+import type { Order } from '@/types/order';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Clock, User, ShoppingBag, CheckCircle, XCircle, Coffee, Timer } from 'lucide-react';
-import type { Order } from '@/types/order';
 import { OrderStatus } from '@/types/order';
 import { cn } from '@/lib/utils';
 

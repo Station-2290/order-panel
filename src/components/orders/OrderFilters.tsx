@@ -1,8 +1,8 @@
+import { CheckCircle, Clock, Coffee, Timer, XCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { OrderStatus } from '@/types/order';
 import { cn } from '@/lib/utils';
-import { Clock, CheckCircle, Coffee, Timer, XCircle } from 'lucide-react';
 
 interface OrderFiltersProps {
   selectedStatus: OrderStatus | 'ALL';

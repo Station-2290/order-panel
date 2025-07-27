@@ -1,9 +1,9 @@
 import { useEffect, useRef } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
+import { toast } from 'sonner';
+import type { OrderEvent } from '@/types/order';
 import { env } from '@/env';
 import { tokenStorage } from '@/shared/auth/storage';
-import type { OrderEvent } from '@/types/order';
-import { toast } from 'sonner';
 
 export function useOrderEvents() {
   const queryClient = useQueryClient();

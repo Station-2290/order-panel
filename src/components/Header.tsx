@@ -1,7 +1,7 @@
 import { Link } from '@tanstack/react-router'
+import { LogOut, User } from 'lucide-react'
 import { Button } from './ui/button'
 import { useAuth } from '@/shared/auth'
-import { LogOut, User } from 'lucide-react'
 
 export default function Header() {
   const { user, logout } = useAuth()

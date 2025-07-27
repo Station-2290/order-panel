@@ -1,6 +1,6 @@
+import { LogOut, RefreshCw, User } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/shared/auth';
-import { LogOut, User, RefreshCw } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 interface MobileHeaderProps {

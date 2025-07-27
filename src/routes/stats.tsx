@@ -1,7 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router';
+import { BarChart3, Clock, DollarSign, TrendingUp } from 'lucide-react';
 import { ResponsiveLayout } from '@/components/layout/ResponsiveLayout';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { BarChart3, TrendingUp, Clock, DollarSign } from 'lucide-react';
 import { useDocumentTitle } from '@/hooks/useDocumentTitle';
 
 export const Route = createFileRoute('/stats')({

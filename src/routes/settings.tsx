@@ -1,11 +1,11 @@
 import { createFileRoute } from '@tanstack/react-router';
+import { Bell, LogOut, Shield, User } from 'lucide-react';
 import { ResponsiveLayout } from '@/components/layout/ResponsiveLayout';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';
 import { useAuth } from '@/shared/auth';
-import { User, Bell, Shield, LogOut } from 'lucide-react';
 import { useDocumentTitle } from '@/hooks/useDocumentTitle';
 
 export const Route = createFileRoute('/settings')({

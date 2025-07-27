@@ -1,3 +1,5 @@
+import { CheckCircle, Clock, Coffee, ShoppingBag, Timer, User, XCircle } from 'lucide-react';
+import type { Order } from '@/types/order';
 import {
   Dialog,
   DialogContent,
@@ -8,9 +10,7 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import type { Order } from '@/types/order';
 import { OrderStatus } from '@/types/order';
-import { Clock, User, ShoppingBag, CheckCircle, XCircle, Coffee, Timer } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 interface OrderDetailsProps {
