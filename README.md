@@ -1,319 +1,334 @@
-Welcome to your new TanStack app!
+# Station2290 Order Panel
 
-# Getting Started
+A specialized order management interface for Station2290 coffee shop kitchen and service staff, built with Vite, React, TypeScript, and TanStack Router. Part of the Station2290 microservices ecosystem.
 
-To run this application:
+## 🚀 Features
 
+### 📋 Real-time Order Management
+- **Live Order Feed**: Real-time order notifications and updates
+- **Order Queue**: Visual order queue with status tracking
+- **Kitchen Display**: Optimized interface for kitchen workflow
+- **Order Processing**: Quick status updates and completion tracking
+
+### ⚡ Kitchen Workflow
+- **Order Prioritization**: Sort orders by time, type, or priority
+- **Status Tracking**: Visual indicators for order progress
+- **Quick Actions**: One-click status updates
+- **Timer Integration**: Track preparation times
+
+### 📱 Touch-Optimized Interface
+- **Tablet-Friendly**: Designed for kitchen tablets and touch screens
+- **Large Touch Targets**: Easy interaction for busy kitchen environment
+- **Minimal UI**: Clean, distraction-free interface
+- **Dark Mode**: Kitchen-friendly dark theme
+
+### 🔔 Notifications & Alerts
+- **Audio Alerts**: Sound notifications for new orders
+- **Visual Indicators**: Color-coded order status
+- **Priority Alerts**: Special handling for urgent orders
+- **System Notifications**: Real-time updates via Server-Sent Events
+
+### 📊 Performance Tracking
+- **Order Metrics**: Track completion times and efficiency
+- **Kitchen Analytics**: Performance insights for staff
+- **Rush Hour Management**: Special modes for busy periods
+
+## 🏗️ Station2290 Architecture
+
+### Microservices Ecosystem
+
+This order panel is part of the Station2290 coffee shop management system:
+
+- **Infrastructure**: [Station2290-Infrastructure](https://github.com/Station-2290/infrastructure)
+- **API Backend**: [Station2290-API](https://github.com/Station-2290/api)
+- **Customer Website**: [Station2290-Web](https://github.com/Station-2290/web)
+- **WhatsApp Bot**: [Station2290-Bot](https://github.com/Station-2290/bot)
+- **Admin Panel**: [Station2290-Adminka](https://github.com/Station-2290/adminka)
+- **Order Panel**: [Station2290-Order-Panel](https://github.com/Station-2290/order-panel) (this repository)
+
+### 🔄 Automatic Deployment
+
+This order panel **deploys automatically** when you push to the `main` branch:
+
+1. **GitHub Actions** builds the Vite application
+2. **Creates** optimized static build
+3. **Containerizes** with Nginx for production serving
+4. **Deploys** to production VPS via SSH
+5. **Health checks** ensure panel accessibility
+
+**Production URL**: https://orders.station2290.ru
+
+## 🛠 Technology Stack
+
+- **Framework**: Vite + React 19
+- **Language**: TypeScript
+- **Routing**: TanStack Router (file-based routing)
+- **State Management**: TanStack Query for server state
+- **Real-time**: Server-Sent Events (SSE) for live order updates
+- **Styling**: Tailwind CSS 4
+- **UI Components**: shadcn/ui with Radix UI primitives
+- **Icons**: Lucide React
+- **Theme**: next-themes with kitchen-optimized dark mode
+- **Audio**: Web Audio API for notification sounds
+- **Package Manager**: pnpm
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+**For Local Development:**
+- Node.js 18+
+- pnpm package manager
+- Access to Station2290 API (local or remote)
+- Employee account with order management permissions
+
+**For Production Deployment:**
+- Infrastructure repository deployed on VPS
+- GitHub Secrets configured for automated deployment
+
+### Local Development Setup
+
+1. **Clone the repository:**
+```bash
+git clone https://github.com/Station-2290/order-panel.git
+cd order-panel
+```
+
+2. **Install dependencies:**
 ```bash
 pnpm install
+```
+
+3. **Environment Configuration:**
+```bash
+cp .env.example .env
+# Edit .env with your configuration
+```
+
+4. **Environment Variables:**
+
+**Local Development:**
+```bash
+# API Configuration
+VITE_API_URL=http://localhost:3000/api/v1
+
+# Application Settings
+VITE_APP_TITLE=Station2290 Orders
+VITE_APP_DESCRIPTION=Kitchen Order Management
+
+# Development Mode
+NODE_ENV=development
+
+# Real-time Features
+VITE_ENABLE_SSE=true
+VITE_ENABLE_AUDIO=true
+```
+
+**Production Environment:**
+```bash
+# Production API
+VITE_API_URL=https://api.station2290.ru/api/v1
+
+# Application Settings
+VITE_APP_TITLE=Station2290 Orders
+VITE_APP_DESCRIPTION=Kitchen Order Management
+
+# Production Mode
+NODE_ENV=production
+
+# Real-time Features
+VITE_ENABLE_SSE=true
+VITE_ENABLE_AUDIO=true
+```
+
+5. **Start Development Server:**
+```bash
 pnpm start
+# or
+pnpm dev
 ```
 
-# Building For Production
+**Local Order Panel**: http://localhost:8081
 
-To build this application for production:
+## 📜 Available Scripts
 
 ```bash
-pnpm build
+# Development
+pnpm start        # Start development server (port 8081)
+pnpm dev          # Alternative development command
+
+# Building
+pnpm build        # Build for production
+pnpm serve        # Preview production build
+
+# Code Quality
+pnpm lint         # Run ESLint
+pnpm format       # Format code with Prettier
+pnpm check        # Run lint + format
+
+# Testing
+pnpm test         # Run tests with Vitest
+
+# API Types
+pnpm gen:api      # Generate API types from OpenAPI schema
 ```
 
-## Testing
+## 📁 Project Structure
 
-This project uses [Vitest](https://vitest.dev/) for testing. You can run the tests with:
-
-```bash
-pnpm test
+```
+src/
+├── routes/                 # TanStack Router file-based routes
+│   ├── __root.tsx         # Root layout
+│   ├── index.tsx          # Order queue dashboard
+│   ├── orders/           # Order detail routes
+│   └── settings/         # Panel settings
+├── components/            # Reusable components
+│   ├── ui/               # shadcn/ui components
+│   ├── orders/           # Order-specific components
+│   ├── kitchen/          # Kitchen workflow components
+│   └── layout/           # Layout components
+├── hooks/                # Custom React hooks
+│   ├── useSSE.ts         # Server-Sent Events hook
+│   ├── useAudio.ts       # Audio notifications hook
+│   └── useOrderQueue.ts  # Order queue management
+├── lib/                  # Utility functions
+├── services/             # API services
+├── types/                # TypeScript type definitions
+└── __generated__/        # Auto-generated API types
 ```
 
-## Styling
-
-This project uses [Tailwind CSS](https://tailwindcss.com/) for styling.
-
-## Linting & Formatting
-
-This project uses [eslint](https://eslint.org/) and [prettier](https://prettier.io/) for linting and formatting. Eslint is configured using [tanstack/eslint-config](https://tanstack.com/config/latest/docs/eslint). The following scripts are available:
-
-```bash
-pnpm lint
-pnpm format
-pnpm check
-```
-
-## Shadcn
-
-Add components using the latest version of [Shadcn](https://ui.shadcn.com/).
-
-```bash
-pnpx shadcn@latest add button
-```
-
-## T3Env
-
-- You can use T3Env to add type safety to your environment variables.
-- Add Environment variables to the `src/env.mjs` file.
-- Use the environment variables in your code.
-
-### Usage
-
-```ts
-import { env } from '@/env'
-
-console.log(env.VITE_APP_TITLE)
-```
-
-## Routing
-
-This project uses [TanStack Router](https://tanstack.com/router). The initial setup is a file based router. Which means that the routes are managed as files in `src/routes`.
-
-### Adding A Route
-
-To add a new route to your application just add another a new file in the `./src/routes` directory.
-
-TanStack will automatically generate the content of the route file for you.
-
-Now that you have two routes you can use a `Link` component to navigate between them.
-
-### Adding Links
-
-To use SPA (Single Page Application) navigation you will need to import the `Link` component from `@tanstack/react-router`.
-
-```tsx
-import { Link } from '@tanstack/react-router'
-```
-
-Then anywhere in your JSX you can use it like so:
-
-```tsx
-<Link to="/about">About</Link>
-```
-
-This will create a link that will navigate to the `/about` route.
-
-More information on the `Link` component can be found in the [Link documentation](https://tanstack.com/router/v1/docs/framework/react/api/router/linkComponent).
-
-### Using A Layout
-
-In the File Based Routing setup the layout is located in `src/routes/__root.tsx`. Anything you add to the root route will appear in all the routes. The route content will appear in the JSX where you use the `<Outlet />` component.
-
-Here is an example layout that includes a header:
-
-```tsx
-import { Outlet, createRootRoute } from '@tanstack/react-router'
-import { TanStackRouterDevtools } from '@tanstack/react-router-devtools'
-
-import { Link } from '@tanstack/react-router'
-
-export const Route = createRootRoute({
-  component: () => (
-    <>
-      <header>
-        <nav>
-          <Link to="/">Home</Link>
-          <Link to="/about">About</Link>
-        </nav>
-      </header>
-      <Outlet />
-      <TanStackRouterDevtools />
-    </>
-  ),
-})
-```
-
-The `<TanStackRouterDevtools />` component is not required so you can remove it if you don't want it in your layout.
-
-More information on layouts can be found in the [Layouts documentation](https://tanstack.com/router/latest/docs/framework/react/guide/routing-concepts#layouts).
-
-## Data Fetching
-
-There are multiple ways to fetch data in your application. You can use TanStack Query to fetch data from a server. But you can also use the `loader` functionality built into TanStack Router to load the data for a route before it's rendered.
-
-For example:
-
-```tsx
-const peopleRoute = createRoute({
-  getParentRoute: () => rootRoute,
-  path: '/people',
-  loader: async () => {
-    const response = await fetch('https://swapi.dev/api/people')
-    return response.json() as Promise<{
-      results: {
-        name: string
-      }[]
-    }>
-  },
-  component: () => {
-    const data = peopleRoute.useLoaderData()
-    return (
-      <ul>
-        {data.results.map((person) => (
-          <li key={person.name}>{person.name}</li>
-        ))}
-      </ul>
-    )
-  },
-})
-```
-
-Loaders simplify your data fetching logic dramatically. Check out more information in the [Loader documentation](https://tanstack.com/router/latest/docs/framework/react/guide/data-loading#loader-parameters).
-
-### React-Query
-
-React-Query is an excellent addition or alternative to route loading and integrating it into you application is a breeze.
-
-First add your dependencies:
-
-```bash
-pnpm add @tanstack/react-query @tanstack/react-query-devtools
-```
-
-Next we'll need to create a query client and provider. We recommend putting those in `main.tsx`.
-
-```tsx
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-
-// ...
-
-const queryClient = new QueryClient()
-
-// ...
-
-if (!rootElement.innerHTML) {
-  const root = ReactDOM.createRoot(rootElement)
-
-  root.render(
-    <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} />
-    </QueryClientProvider>,
-  )
-}
-```
-
-You can also add TanStack Query Devtools to the root route (optional).
-
-```tsx
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
-
-const rootRoute = createRootRoute({
-  component: () => (
-    <>
-      <Outlet />
-      <ReactQueryDevtools buttonPosition="top-right" />
-      <TanStackRouterDevtools />
-    </>
-  ),
-})
-```
-
-Now you can use `useQuery` to fetch your data.
-
-```tsx
-import { useQuery } from '@tanstack/react-query'
-
-import './App.css'
-
-function App() {
-  const { data } = useQuery({
-    queryKey: ['people'],
-    queryFn: () =>
-      fetch('https://swapi.dev/api/people')
-        .then((res) => res.json())
-        .then((data) => data.results as { name: string }[]),
-    initialData: [],
-  })
-
-  return (
-    <div>
-      <ul>
-        {data.map((person) => (
-          <li key={person.name}>{person.name}</li>
-        ))}
-      </ul>
-    </div>
-  )
-}
-
-export default App
-```
-
-You can find out everything you need to know on how to use React-Query in the [React-Query documentation](https://tanstack.com/query/latest/docs/framework/react/overview).
-
-## State Management
-
-Another common requirement for React applications is state management. There are many options for state management in React. TanStack Store provides a great starting point for your project.
-
-First you need to add TanStack Store as a dependency:
-
-```bash
-pnpm add @tanstack/store
-```
-
-Now let's create a simple counter in the `src/App.tsx` file as a demonstration.
-
-```tsx
-import { useStore } from '@tanstack/react-store'
-import { Store } from '@tanstack/store'
-import './App.css'
-
-const countStore = new Store(0)
-
-function App() {
-  const count = useStore(countStore)
-  return (
-    <div>
-      <button onClick={() => countStore.setState((n) => n + 1)}>
-        Increment - {count}
-      </button>
-    </div>
-  )
-}
-
-export default App
-```
-
-One of the many nice features of TanStack Store is the ability to derive state from other state. That derived state will update when the base state updates.
-
-Let's check this out by doubling the count using derived state.
-
-```tsx
-import { useStore } from '@tanstack/react-store'
-import { Store, Derived } from '@tanstack/store'
-import './App.css'
-
-const countStore = new Store(0)
-
-const doubledStore = new Derived({
-  fn: () => countStore.state * 2,
-  deps: [countStore],
-})
-doubledStore.mount()
-
-function App() {
-  const count = useStore(countStore)
-  const doubledCount = useStore(doubledStore)
-
-  return (
-    <div>
-      <button onClick={() => countStore.setState((n) => n + 1)}>
-        Increment - {count}
-      </button>
-      <div>Doubled - {doubledCount}</div>
-    </div>
-  )
-}
-
-export default App
-```
-
-We use the `Derived` class to create a new store that is derived from another store. The `Derived` class has a `mount` method that will start the derived store updating.
-
-Once we've created the derived store we can use it in the `App` component just like we would any other store using the `useStore` hook.
-
-You can find out everything you need to know on how to use TanStack Store in the [TanStack Store documentation](https://tanstack.com/store/latest).
-
-# Demo files
-
-Files prefixed with `demo` can be safely deleted. They are there to provide a starting point for you to play around with the features you've installed.
-
-# Learn More
-
-You can learn more about all of the offerings from TanStack in the [TanStack documentation](https://tanstack.com).
+## 🎯 Core Features
+
+### Order Queue Management
+- **Real-time Updates**: Live order feed with SSE integration
+- **Visual Queue**: Kanban-style order status board
+- **Priority Sorting**: Automatic and manual order prioritization
+- **Filter Options**: Filter by status, time, or customer type
+
+### Kitchen Workflow
+- **Order Cards**: Detailed order information cards
+- **Quick Actions**: Fast status change buttons
+- **Timer Display**: Visual preparation time tracking
+- **Completion Tracking**: Mark orders as ready/completed
+
+### Audio & Visual Notifications
+- **Sound Alerts**: Customizable notification sounds
+- **Visual Alerts**: Flashing indicators for new orders
+- **Priority Signals**: Different alerts for urgent orders
+- **Quiet Mode**: Disable audio during specified hours
+
+### Touch Interface
+- **Large Buttons**: Easy touch targets for kitchen environment
+- **Swipe Gestures**: Swipe to change order status
+- **Full-screen Mode**: Distraction-free kitchen display
+- **Responsive Design**: Works on tablets and desktop monitors
+
+## 🔐 Authentication & Authorization
+
+### Access Control
+- **Employee Authentication**: Secure login for kitchen staff
+- **Role-Based Access**: Employee and Manager permissions
+- **Session Management**: Persistent authentication
+- **API Key Support**: Alternative authentication for kitchen displays
+
+### User Permissions
+| Role | Access |
+|------|--------|
+| **Manager** | Full order management, settings, analytics |
+| **Employee** | Order processing, status updates |
+| **Kitchen Display** | View-only mode with API key |
+
+## 📡 Real-time Integration
+
+### Server-Sent Events (SSE)
+- **Live Order Feed**: Real-time order updates from API
+- **Status Synchronization**: Multi-device status sync
+- **Connection Management**: Automatic reconnection handling
+- **Error Recovery**: Graceful fallback on connection loss
+
+### Event Types
+- **order_created**: New order notifications
+- **order_updated**: Status change notifications
+- **order_completed**: Order completion alerts
+- **queue_updated**: Queue position changes
+
+## 🎨 Kitchen-Optimized Design
+
+### Visual Design
+- **High Contrast**: Easy reading in kitchen lighting
+- **Color Coding**: Intuitive order status colors
+- **Large Typography**: Readable from distance
+- **Minimal Interface**: Focus on essential information
+
+### Responsive Layout
+- **Tablet Portrait**: Primary kitchen tablet mode
+- **Desktop Monitor**: Large kitchen display mode
+- **Mobile Support**: Manager oversight on phone
+- **Multi-screen**: Support for multiple kitchen displays
+
+## 🚀 Production Deployment
+
+### Automatic Deployment Process
+1. **Build Optimization**: Vite production build
+2. **Asset Optimization**: Optimized for kitchen tablet performance
+3. **Service Worker**: Offline functionality for reliability
+4. **Health Monitoring**: Kitchen display uptime monitoring
+
+### Performance Features
+- **Fast Loading**: Optimized for kitchen tablet hardware
+- **Offline Support**: Continue viewing orders during network issues
+- **Background Sync**: Sync status changes when connection restored
+- **Memory Management**: Efficient handling of large order queues
+
+## 🔧 Kitchen Setup
+
+### Hardware Recommendations
+- **Tablet**: 10"+ Android/iPad for primary display
+- **Mount**: Kitchen-safe tablet mounting system
+- **Network**: Reliable WiFi connection to VPS
+- **Audio**: External speakers for notification sounds
+
+### Configuration
+- **Auto-login**: Configure API key for unattended operation
+- **Display Settings**: Set appropriate brightness and timeout
+- **Audio Volume**: Configure notification sound levels
+- **Screen Protection**: Use screen protector for kitchen environment
+
+## 🤝 Contributing
+
+1. Create a feature branch from `main`
+2. Follow kitchen-workflow-focused design principles
+3. Test on tablet devices and touch interfaces
+4. Ensure real-time features work reliably
+5. Submit pull request with kitchen staff feedback
+
+### Development Guidelines
+- Prioritize touch-friendly interface design
+- Ensure high contrast and readability
+- Test with real kitchen workflow scenarios
+- Optimize for tablet performance
+- Consider noise and lighting conditions
+
+## 🔧 Troubleshooting
+
+### Common Issues
+- **SSE Connection**: Check network and API endpoint
+- **Audio Not Playing**: Verify browser audio permissions
+- **Touch Responsiveness**: Ensure proper touch target sizes
+- **Performance**: Monitor memory usage on older tablets
+
+### Kitchen Support
+- **Network Issues**: Offline mode continues to show current orders
+- **Device Problems**: Quick restart procedure for kitchen tablets
+- **Staff Training**: Simple interface designed for quick learning
+
+## 📞 Support
+
+For technical support or questions about the order panel:
+- Create an issue in the GitHub repository
+- Check kitchen setup documentation
+- Contact development team for urgent kitchen issues
+
+---
+
+**Station2290 Order Panel** - Streamlined order management for efficient kitchen operations ⚡️
