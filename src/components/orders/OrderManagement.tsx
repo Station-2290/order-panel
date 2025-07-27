@@ -135,8 +135,8 @@ export function OrderManagement() {
                 onClick={handleRefresh}
                 disabled={isLoading}
               >
-                {/* eslint-disable-next-line @typescript-eslint/no-unnecessary-condition */}
                 <RefreshCw
+                  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
                   className={cn('h-4 w-4', isLoading && 'animate-spin')}
                 />
                 <span className="ml-1">Обновить</span>
